@@ -1,12 +1,15 @@
 name: MLOps CI
 
 on:
-  push: 
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch: {} # allows manual triggering of the workflow
+  # the following lines is used to trigger on push and pull request events
+  # push: 
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches:
+  #     - main
+
 
 jobs:
   e2e:
