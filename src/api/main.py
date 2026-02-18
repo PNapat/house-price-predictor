@@ -33,7 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize and instrument Prometheus metrics
+# Initialize and instrument Prometheus metrics (selfnote: automate "/matrics" for monitoring)
 Instrumentator().instrument(app).expose(app) #ADDED FOR PROMETHEUS INTEGRATION
 
 # Health check endpoint

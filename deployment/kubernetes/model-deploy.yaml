@@ -20,5 +20,12 @@ spec:
         name: house-price-model
         ports:
         - containerPort: 8000
-        resources: {}
+        # resources: {}         # Selfnote: This file is created with kubectl create deployment --dry-run=client -o yaml, so it includes some default fields like 'resources' and 'strategy' which are empty. We can customize these as needed.
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
 status: {}
