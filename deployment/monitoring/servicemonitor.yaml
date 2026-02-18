@@ -12,6 +12,6 @@ spec:
     matchNames:
       - default # or your namespace
   endpoints:
-    - port: "8000" # or match name of your service port
+    - port: "9100" # or match name of your service port
       path: /metrics
       interval: 15s

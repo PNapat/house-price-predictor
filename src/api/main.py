@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from inference import predict_price, batch_predict
 from schemas import HousePredictionRequest, PredictionResponse
 from prometheus_fastapi_instrumentator import Instrumentator #ADDED FOR PROMETHEUS INTEGRATION
+from prometheus_client import start_http_server
 
 # Initialize FastAPI app with metadata
 app = FastAPI(
@@ -35,6 +36,13 @@ app.add_middleware(
 
 # Initialize and instrument Prometheus metrics (selfnote: automate "/matrics" for monitoring)
 Instrumentator().instrument(app).expose(app) #ADDED FOR PROMETHEUS INTEGRATION
+
+# Start prometheus metrics server on port 9100 in a background thread (selfnote: this allows Prometheus to scrape metrics without blocking the main application)
+# selfnote: Tried using the same port 8000 for both FastAPI and Prometheus, but monitoring didn't work when the model was deployed on Kubernetes.
+def start_metrics_server():
+    start_http_server(9100)
+
+threading.Thread(target=start_metrics_server, daemon=True).start()
 
 # Health check endpoint
 @app.get("/health", response_model=dict)

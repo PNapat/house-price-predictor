@@ -19,7 +19,11 @@ spec:
       - image: pnapat/house-price-model:latest
         name: house-price-model
         ports:
+        # - containerPort: 8000
+        # This is revised to serve the added metrics endpoint for Prometheus integration
         - containerPort: 8000
+        - containerPort: 9100
+
         # resources: {}         # Selfnote: This file is created with kubectl create deployment --dry-run=client -o yaml, so it includes some default fields like 'resources' and 'strategy' which are empty. We can customize these as needed.
         resources:
           requests:

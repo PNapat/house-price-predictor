@@ -6,11 +6,16 @@ metadata:
   name: model
 spec:
   ports:
-  - name: "8000"
-    nodePort: 30100
+  - name: app
+    nodePort: 30100 # This can be omitted and will be auto-assigned if not specified.
     port: 8000
     protocol: TCP
     targetPort: 8000
+  - name: metrics
+    nodePort: 30101 # This can be omitted and will be auto-assigned if not specified.
+    port: 9100
+    protocol: TCP
+    targetPort: 9100
   selector:
     app: model
   type: NodePort
