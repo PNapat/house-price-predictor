@@ -18,7 +18,8 @@ spec:
         query: |
           histogram_quantile(0.95,
             sum(rate(http_request_duration_seconds_bucket[1m])) by (le))
-        threshold: "0.5"
+        # threshold: "0.5"
+        threshold: "0.3"
 
     # Add only the following to existing code
     - type: prometheus
@@ -26,4 +27,10 @@ spec:
         serverAddress: http://prom-kube-prometheus-stack-prometheus.monitoring.svc:9090
         metricName: request_rate
         query: sum(rate(http_requests_total[1m]))
-        threshold: "1000"
+        # threshold: "1000"
+        threshold: "5"
+
+    - type: cpu
+      metricType: Utilization # Allowed types are 'Utilization' or 'AverageValue'
+      metadata:
+        value: "50"
