@@ -4,6 +4,7 @@ from inference import predict_price, batch_predict
 from schemas import HousePredictionRequest, PredictionResponse
 from prometheus_fastapi_instrumentator import Instrumentator #ADDED FOR PROMETHEUS INTEGRATION
 from prometheus_client import start_http_server
+import threading
 
 # Initialize FastAPI app with metadata
 app = FastAPI(
